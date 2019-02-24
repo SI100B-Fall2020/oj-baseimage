@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+function stage () {
+        echo "@logseg $1"
+}
+
+function exit_trap () {
+        exit 0 #$1
+}
+
+if [ -f /submission/dependencies ] ; then
+        stage dep
+        cd /judge
+        awk -F: -f dep.awk /submission/dependencies | xargs -r -L 1 sh -c 'python3 $0 $@ || exit 255' || exit_trap 7
+fi
+

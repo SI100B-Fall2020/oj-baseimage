@@ -93,22 +93,22 @@ def mb(count):
 
 
 norm, err = run(
-	16, 							# 16 sec CPU time
-	16, 							# 16 src real time
-	mb(256),						# 256 mem
-	mb(16),							# 16 MB stack
-	mb(1),							# 1MB output max
-	1,								# no sub process
-	"/test/executable",			# the compiled binary
-	"/test/input",					# STDIN
-	"/test/output",					# STDOUT
-	"/dev/null",				# STDERR, discarded
-	[],								# argv
-	[],								# env
-	"/dev/stdout",					# judger log path
-	"c_cpp", 						# or general, predefined seccomp profile
-	1,								# setuid 1
-	1								# setgid 1
+	16,				# 16 sec CPU time
+	16, 				# 16 src real time
+	mb(256),			# 256 mem
+	mb(16),				# 16 MB stack
+	mb(1),				# 1MB output max
+	1,				# no sub process
+	"/test/executable",		# the compiled binary
+	"/test/input",			# STDIN  - normally you won't want this to go public
+	"/test/output",			# STDOUT - normally you won't want this to go public
+	"/dev/null",			# STDERR, discarded
+	[],				# argv
+	[],				# env
+	"/dev/stdout",			# judger log path - have it print to container console
+	"c_cpp", 			# or general. predefined, seccomp profile
+	1000,				# setuid 1
+	1000				# setgid 1
 )
 
 if err < 0:

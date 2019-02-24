@@ -14,6 +14,9 @@ RUN cd /tmp/qdujudger && \
 	make install && \
 	rm -rf /tmp/qdujudger
 
+# This is the user that student program will run under
+RUN groupadd -g 1000 student && useradd -g 1000 -u 1000 -d /test student  
+
 # you can add dependencies from other kind of repositories as well.
 # Just prefix the installation command with RUN,
 # and make sure the package manangement tool is installed
@@ -24,16 +27,20 @@ RUN pip3 install pip
 RUN mkdir /test /submission
 
 # Copy the grading scripts
-COPY *.awk *.sh *.py /judge/
-COPY grade /judge/grade
-RUN chmod +x /judge/*.sh && chmod +x /judge/*.py
+COPY setup build run grade *.sh *.awk *.py /judge/
+COPY grading /judge/grading
 
-# Generate the test samples
-# While in this case it's static,
-# you could replace it with a reference implementation running on testcases.
+# Copy the testcases
+# Here we don't have any so it's commented out
+#COPY input /test/input
+
+# Fix permission
+RUN chmod 500 -R /judge /submission && chown student:student -R /test
+
+# Generate the reference output
+# While in this case it's not needed,
+# you could replace it with a reference implementation running on your input.
 # The process of this genenration will run on your provided judging server(s)
 # and its result will be cached.
-RUN python3 /judge/grade/generate_sample.py > /test/input
-
-ENTRYPOINT /judge/entry-point.sh
+# RUN python3 /judge/grading/generate_output.py > /judge/grading/output
 
