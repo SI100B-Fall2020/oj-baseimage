@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "./run.py", line 112, in <module>
+    1000				# setgid 1
+  File "./run.py", line 88, in run
+    return out.decode("utf-8"), 0
+NameError: name 'out' is not defined

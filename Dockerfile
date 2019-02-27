@@ -24,7 +24,7 @@ RUN pip3 install pip
 
 # /test will hold test output, but it's not mandatory nor hardcoded
 # /submission will hold student submission and this name is mandatory and hardcoded
-RUN mkdir /test /submission
+RUN mkdir /test /submission && touch /test/output
 
 # Copy the grading scripts
 COPY setup build run grade *.sh *.awk *.py /judge/

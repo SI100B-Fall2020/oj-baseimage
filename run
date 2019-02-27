@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
 
-function stage () {
-        echo "@logseg $1"
-}
-
 function exit_trap () {
         exit 0 #$1
 }
 
 cd /judge
 
-# stage run
 ./run.py || exit_trap $?
 

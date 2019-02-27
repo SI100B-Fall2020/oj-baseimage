@@ -81,38 +81,38 @@ def run(max_cpu_time,
 		raise ValueError("seccomp_rule_name must be a string or None")
 	if seccomp_rule_name:
 		proc_args.append("--seccomp_rule={}".format(seccomp_rule_name))
-
-	proc = subprocess.Popen(proc_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	out, err = proc.communicate()
-	if err:
-		return 0, ValueError("Error occurred while calling judger: {}".format(err))
-	return json.loads(out.decode("utf-8")), 0
+	
+	ret = subprocess.run(proc_args)
+	return ret.returncode
+	#return json.loads(out.decode("utf-8")), 0
 
 def mb(count):
 	return count * 1024 * 1024
 
 
-norm, err = run(
+err = run(
 	16,				# 16 sec CPU time
-	16, 				# 16 src real time
+	16, 				# 16 sec real time
 	mb(256),			# 256 mem
 	mb(16),				# 16 MB stack
-	mb(1),				# 1MB output max
-	1,				# no sub process
+	mb(16),				# 1MB output max
+	UNLIMITED,			# does not limit process count
 	"/test/executable",		# the compiled binary
-	"/test/input",			# STDIN  - normally you won't want this to go public
+	"/dev/null",			# STDIN - normally you won't want this to go public
+	#"/judge/grading/input",	# Since we have no input, use /dev/null instead
 	"/test/output",			# STDOUT - normally you won't want this to go public
 	"/dev/null",			# STDERR, discarded
 	[],				# argv
 	[],				# env
 	"/dev/stdout",			# judger log path - have it print to container console
 	"c_cpp", 			# or general. predefined, seccomp profile
-	1000,				# setuid 1
-	1000				# setgid 1
+	1000,				# setuid 1000
+	1000, 				# setgid 1000
+	1				# does not use rlimit to limit mem used as it could cause crashes
 )
 
 if err < 0:
-	print(-err+100)
+	exit(100-err)
 else:
-	print(err)
+	exit(err)
 
