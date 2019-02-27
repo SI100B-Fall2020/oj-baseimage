@@ -9,7 +9,7 @@ function exit_trap () {
 }
 
 if [ -f /submission/dependencies ] ; then
-        stage dep
+        # stage dep
         cd /judge
         awk -F: -f dep.awk /submission/dependencies | xargs -r -L 1 sh -c 'python3 $0 $@ || exit 255' || exit_trap 7
 fi

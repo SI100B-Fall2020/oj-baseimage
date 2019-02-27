@@ -10,6 +10,6 @@ function exit_trap () {
 
 cd /judge
 
-stage run
+# stage run
 ./run.py || exit_trap $?
 

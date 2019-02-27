@@ -9,7 +9,7 @@ function exit_trap () {
 }
 
 cd /submission/
-stage build
+# stage build
 gcc -O2 -w -fmax-errors=3 -std=c11 /submission/main.c -lm -o /test/executable || exit_trap 6
 
 chown student:student -R /test

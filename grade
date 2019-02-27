@@ -8,6 +8,6 @@ function exit_trap () {
         exit 0 #$1
 }
 
-stage grade
+# stage grade
 /judge/grading/grade.py < /test/output || exit_trap 0 # 0 score on grading script error
 
