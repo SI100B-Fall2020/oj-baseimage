@@ -27,21 +27,22 @@ def compare_file(lhs, rhs, ignore_blank_line=True):
     opt = "-qa"
     if ignore_blank_line:
         opt += "ZB"
+
     if lhs == stdin:
         if not isinstance(rhs, str):
             raise TypeError("rhs is of type %s while str is expected" % type(rhs))
-        ret = subprocess.run(args=["/usr/bin/diff", opt, "-", rhs])
-        return not ret.returncode
-    if rhs == stdin:
+        a, b = "-", rhs
+    elif rhs == stdin:
         if not isinstance(lhs, str):
             raise TypeError("lhs is of type %s while str is expected" % type(rhs))
-        ret = subprocess.run(args=["/usr/bin/diff", opt, "-", lhs])
-        return not ret.returncode
-    if not isinstance(lhs, str):
-        raise TypeError("lhs is of type %s while str is expected" % type(rhs))
-    if not isinstance(rhs, str):
-        raise TypeError("rhs is of type %s while str is expected" % type(rhs))
-    ret = subprocess.run(args=["/usr/bin/diff", opt, lhs, rhs])
+        a, b = "-", lhs
+    else:
+        if not isinstance(lhs, str):
+            raise TypeError("lhs is of type %s while str is expected" % type(rhs))
+        if not isinstance(rhs, str):
+            raise TypeError("rhs is of type %s while str is expected" % type(rhs))
+    a, b = lhs, rhs
+    ret = subprocess.run(args=["/usr/bin/diff", opt, a, b], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return not ret.returncode
 
 
