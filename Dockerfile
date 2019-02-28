@@ -43,9 +43,6 @@ COPY grading /judge/grading
 RUN chmod 500 -R /judge /submission && chown student:student -R /test
 
 # Generate the reference output
-# While in this case it's not needed,
-# you could replace it with a reference implementation running on your input.
-# The process of this genenration will run on your provided judging server(s)
-# and its result will be cached.
+# Here we use static ones
 # RUN python3 /judge/grading/generate_output.py > /judge/grading/output
-
+COPY tests /judge/tests
