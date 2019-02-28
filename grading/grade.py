@@ -6,7 +6,7 @@ from utils import *
 from sys import argv
 from pathlib import Path
 with Judging() as e:
-	for i in range(0, int(argv[1])):
+	for i in range(0, int(argv[1]) + 1):
 		# We do not catch any exceptions, because there is few reasonable
 		# way to deal with it.
 		# Better pop it up out to the frontend.
