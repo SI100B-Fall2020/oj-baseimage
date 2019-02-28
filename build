@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
-function exit_trap () {
-        exit 0 #$1
-}
-
 cd /submission/
-gcc -O2 -w -fmax-errors=3 -std=c11 /submission/main.c -lm -o /test/executable || exit_trap 6
+gcc -O2 -w -fmax-errors=3 -std=c11 /submission/main.c -lm -o /test/executable
 
 chown student:student -R /test
 

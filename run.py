@@ -5,12 +5,12 @@
 from pathlib import Path
 import json
 import subprocess
+from sys import argv
 
 UNLIMITED = -1
 VERSION = 0x020101
 
 RESULT_SUCCESS = 0
-RESULT_WRONG_ANSWER = -1
 RESULT_CPU_TIME_LIMIT_EXCEEDED = 1
 RESULT_REAL_TIME_LIMIT_EXCEEDED = 2
 RESULT_MEMORY_LIMIT_EXCEEDED = 3
@@ -91,17 +91,17 @@ def mb(count):
 
 
 err = run(
-	16,				# 16 sec CPU time
-	16, 				# 16 sec real time
-	mb(256),			# 256 mem
+	argv[4],			# 16 sec CPU time
+	argv[5],			# 16 sec real time
+	argv[6],			# 256 mem
 	mb(16),				# 16 MB stack
-	mb(16),				# 1MB output max
+	mb(16),				# 16MB output max
 	UNLIMITED,			# does not limit process count
 	"/test/executable",		# the compiled binary
-	"/dev/null",			# STDIN - normally you won't want this to go public
-	#"/judge/grading/input",	# Since we have no input, use /dev/null instead
-	"/test/output",			# STDOUT - normally you won't want this to go public
-	"/dev/null",			# STDERR, discarded
+	argv[1],			# STDIN - normally you won't want this to go public
+	#"/judge/tests/input0",	# Since we have no input, use /dev/null instead
+	argv[2],			# STDOUT - normally you won't want this to go public
+	argv[3],			# STDERR, discarded
 	[],				# argv
 	[],				# env
 	"/dev/stdout",			# judger log path - have it print to container console

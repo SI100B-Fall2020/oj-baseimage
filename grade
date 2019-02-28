@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 function exit_trap () {
-        exit 0 #$1
+    exit $1
 }
 
-/judge/grading/grade.py < /test/output || exit_trap 0 # 0 score on grading script error
-
+/judge/grading/grade.py $(cat /judge/tests/last) || exit_trap 0 # 0 score on grading script error

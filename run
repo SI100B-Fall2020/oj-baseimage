@@ -1,10 +1,21 @@
 #!/usr/bin/env bash
 
-function exit_trap () {
-        exit 0 #$1
-}
-
 cd /judge
 
-./run.py || exit_trap $?
+if [ -f /judge/tests/last ] ; then
+    echo "/judge/tests/last not found" 1>&2
+    exit 1
+fi
 
+for INDEX in {0..$(cat /judge/tests/last)} ; do
+    touch "/judge/tests/input/${INDEX}"
+    if [ -f "/judge/tests/req/${INDEX}" ] ; then
+        RESOURCE=$(cat "/judge/tests/req/${INDEX}")
+    elif [ -f "/judge/tests/req/default" ] ; then
+        RESOURCE=$(cat "/judge/tests/req/default")
+    else
+        echo "resource constraint for ${INDEX} not found" 1>&2
+        exit 1
+    fi
+    ./run.py "/judge/tests/input/${INDEX}" "/test/${INDEX}" "/dev/null" ${RESOURCE} || echo $? > /test/err${INDEX}
+done

@@ -6,6 +6,11 @@ RUN sed -i 's/archive.ubuntu.com/mirrors.geekpie.club/' /etc/apt/sources.list
 # install dependencies of sandbox and scripts
 RUN apt-get update && apt-get install -y cmake python3 python3-pip libseccomp-dev gcc g++
 
+# Install your custom dependency here
+# Just prefix your install command with RUN
+# For apt, you don't need to apt-get update as we have done it for you
+# RUN apt-get install gcc-multilib
+
 # Install sandbox
 COPY qdujudger /tmp/qdujudger
 RUN cd /tmp/qdujudger && \
