@@ -91,9 +91,9 @@ def mb(count):
 
 
 err = run(
-	int(argv[4]),			# 16 sec CPU time
-	int(argv[5]),			# 16 sec real time
-	int(argv[6]),			# 256 mem
+	int(argv[4]),			# CPU time
+	int(argv[5]),			# real time
+	mb(int(argv[6])),		# mem
 	mb(16),				# 16 MB stack
 	mb(16),				# 16MB output max
 	UNLIMITED,			# does not limit process count
