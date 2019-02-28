@@ -74,7 +74,7 @@ class Judging(object):
         self.reports = []
 
     def __enter__(self):
-        pass
+        return self
 
     def err(self, *args):
         print(*args, file=sys.stderr)
