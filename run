@@ -10,7 +10,7 @@ else
     exit 1
 fi
 
-for INDEX in {0..${TOTAL}} ; do
+for INDEX in $(seq -s " " 0 ${TOTAL}) ; do
     touch "/judge/tests/input/${INDEX}"
     if [ -f "/judge/tests/req/${INDEX}" ] ; then
         RESOURCE=$(cat "/judge/tests/req/${INDEX}")
