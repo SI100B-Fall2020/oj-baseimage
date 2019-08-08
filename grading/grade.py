@@ -21,13 +21,11 @@ with Judging() as e:
 			e.add_errored_testcase(err,1)
 		else:
 			passed = compare_file("/test/{}".format(i), "/judge/tests/output/{}".format(i))
-			# If your test case is simple yes/no, use add_boolean_testcase
+			# If your test case is simple passed/failed, use add_boolean_testcase
 			# This will declare a testcase that worth 1 point.
+			# If you want to make it more than 1 point, or want to award partial success, 
+			# e.g. give 1 point for a 2 points testcase, use e.add_scored_testcase
 			# For demonstration purpose, we don't use add_boolean_testcase here, but it is 
 			# 100% valid to use it here.
 			# e.add_boolean_testcase(passed)
-			
-			# If you want to make it more than 1 point, or want to award partial success, 
-			# e.g. give 1 point for a 2 pts testcase,
-			# use e.add_scored_testcase
 			e.add_scored_testcase(10 if passed else 0, 10)
