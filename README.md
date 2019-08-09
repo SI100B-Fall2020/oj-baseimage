@@ -27,6 +27,12 @@ image to suit your needs.
 It is placed in `tests/` directory. Please refer to readme inside those 
 directories on details.
 
+## More testcases/Different testcase worth differetly
+
+It is all within `grade/grade.py`. The existing template (and its comments) should help you a lot in understanding how to write it.
+
+You don't have to strictly follow the template's coding style or overall control flow. As long as your program is properly outputing scoring info and terminates properly afterwards, you can do whatever you like inside the grading script. If you need a even more drastical change, you can scrape the entire script and change `grade` script instead.  More on these scripts in [WALKTHROUGH.md](WALKTHROUGH.md).
+
 ## Customize build command
 
 1. Edit `build` script. 
