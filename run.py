@@ -89,17 +89,19 @@ def run(max_cpu_time,
 def mb(count):
 	return count * 1024 * 1024
 
+def sec(ms):
+	return int(ms) * 1000
 
 err = run(
-	int(argv[4]),			# CPU time
-	int(argv[5]),			# real time
+	sec(argv[4]),			# CPU time
+	sec(argv[5]),			# real time
 	mb(int(argv[6])),		# mem
 	mb(16),				# 16 MB stack
 	mb(16),				# 16MB output max
 	UNLIMITED,			# does not limit process count
 	"/test/executable",		# the compiled binary
 	argv[1],			# STDIN - normally you won't want this to go public
-	#"/judge/tests/input0",	# Since we have no input, use /dev/null instead
+	# "/dev/null",			# If you have no input, uncomment this line
 	argv[2],			# STDOUT - normally you won't want this to go public
 	argv[3],			# STDERR, discarded
 	[],				# argv
