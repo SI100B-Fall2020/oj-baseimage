@@ -108,6 +108,10 @@ err = run(
 	[],				# env
 	"/dev/stdout",			# judger log path - have it print to container console
 	"c_cpp", 			# or general. predefined, seccomp profile
+	                                # or c_cpp_with_io, if you want to open files by name.
+	                                # by using c_cpp_with_io, you affirm that you understood that student
+	                                # could tamper with your grading script if you are not careful
+	                                # Still, students normally can only read/write within /test. Be on your guard.
 	1000,				# setuid 1000
 	1000, 				# setgid 1000
 	1				# does not use rlimit to limit mem used as it could cause crashes
