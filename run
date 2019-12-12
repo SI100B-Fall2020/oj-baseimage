@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 cd /judge
+mkdir output
 
 if [ -f /judge/tests/last ] ; then
     TOTAL=$(cat /judge/tests/last)
@@ -20,5 +21,8 @@ for INDEX in $(seq -s " " 0 ${TOTAL}) ; do
         echo "resource constraint for ${INDEX} not found" 1>&2
         exit 1
     fi
-    ./run.py "/judge/tests/input/${INDEX}" "/test/${INDEX}" "/dev/null" ${RESOURCE} || echo $? > /test/err${INDEX}
+    mkdir /test -p
+    chown 1000:1000 /test
+    ./run.py "/judge/tests/input/${INDEX}" "/judge/output/stdout${INDEX}" "/dev/null" ${RESOURCE} || echo $? > /test/err${INDEX}
+    mv /test "output/${INDEX}"
 done
