@@ -99,7 +99,7 @@ err = run(
 	mb(16),				# 16 MB stack
 	mb(16),				# 16MB output max
 	UNLIMITED,			# does not limit process count
-	"/test/executable",		# the compiled binary
+	"/executable",			# the compiled binary
 	argv[1],			# STDIN - normally you won't want this to go public
 	# "/dev/null",			# If you have no input, uncomment this line
 	argv[2],			# STDOUT - normally you won't want this to go public
