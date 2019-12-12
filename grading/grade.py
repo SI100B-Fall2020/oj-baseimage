@@ -2,6 +2,11 @@
 # Somehow grade the output based on something.
 # This example script do a string compare using `diff -daZB` on each
 # test output and reference output.
+
+# YOU CAN CHANGE THIS SCRIPT HOWEVER YOU WANT PROVIDED YOU DON'T PRINT TO CONSOLE
+# AND USING SUPPLIED Judging() TO REPORT STUDENT SCORES
+# unless you know what you are doing.
+
 from utils import *
 from sys import argv
 from pathlib import Path
@@ -10,7 +15,7 @@ with Judging() as e:
 		# We do not catch any exceptions, because there is few reasonable
 		# way to deal with it.
 		# Better pop it up out to the frontend.
-		err_path = "/test/err{}".format(i)
+		err_path = "/judge/output/err{}".format(i)
 		if Path(err_path).exists():
 			t = open(err_path)
 			# Please consult /run.py on what this err can be
