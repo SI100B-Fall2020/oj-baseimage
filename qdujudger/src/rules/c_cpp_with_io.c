@@ -7,7 +7,7 @@
 #include "../runner.h"
 
 
-int c_cpp_seccomp_rules(struct config *_config) {
+int c_cpp_with_io_seccomp_rules(struct config *_config) {
     int syscalls_whitelist[] = {SCMP_SYS(read), SCMP_SYS(fstat),
                                 SCMP_SYS(mmap), SCMP_SYS(mprotect),
                                 SCMP_SYS(munmap), SCMP_SYS(uname),
